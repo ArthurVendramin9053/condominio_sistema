@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manutenção</title>
+    <link rel="stylesheet" href="../css/manutencao.css">
+</head>
+<body>
+    <header>
+        <h1>Manutenção</h1>
+    </header>
+
+    <main>
+        <section id="form-manutencao">
+            <h2>Adicionar Tipo de Manutenção</h2>
+            <form id="manutencaoForm">
+                <label for="nomeManutencao">Nome:</label>
+                <input type="text" id="nomeManutencao" name="nomeManutencao" required>
+
+                <label for="descricaoManutencao">Descrição:</label>
+                <input type="text" id="descricaoManutencao" name="descricaoManutencao">
+
+                <button type="submit">Salvar</button>
+            </form>
+        </section>
+
+        <section id="lista-manutencao">
+            <h2>Tipos Cadastrados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="manutencaoTableBody">
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="../js/manutencao.js"></script>
+</body>
+</html>
