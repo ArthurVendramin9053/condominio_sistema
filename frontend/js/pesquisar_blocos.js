@@ -1,44 +1,59 @@
-const blocos = [
-  { id: 1, descricao: "Bloco A", qtd_apartamentos: 10 },
-  { id: 2, descricao: "Bloco B", qtd_apartamentos: 8 },
-  { id: 3, descricao: "Bloco C", qtd_apartamentos: 12 }
-];
+document.addEventListener("DOMContentLoaded", () => {
+    const tabela = document.getElementById("tabelaBlocos");
+    const campoPesquisa = document.getElementById("campoPesquisa");
+    const btnPesquisar = document.getElementById("btnPesquisar");
+    const btnNovo = document.getElementById("btnNovo");
+    const btnVoltar = document.getElementById("btnVoltar");
 
-function carregarTabela() {
-  const tbody = document.querySelector('#tabelaBlocos tbody');
-  tbody.innerHTML = '';
+    let blocos = [
+        { nome: "Bloco A" },
+        { nome: "Bloco B" },
+        { nome: "Bloco C" }
+    ];
 
-  blocos.forEach(bloco => {
-    const linha = document.createElement('tr');
-    linha.innerHTML = `
-      <td>${bloco.id}</td>
-      <td>${bloco.descricao}</td>
-      <td>${bloco.qtd_apartamentos}</td>
-    `;
-    tbody.appendChild(linha);
-  });
-}
+    function renderTabela(filtro = "") {
+        tabela.innerHTML = "";
+        blocos
+            .filter(b => b.nome.toLowerCase().includes(filtro.toLowerCase()))
+            .forEach((b, index) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${b.nome}</td>
+                    <td>
+                        <button class="btnAlterar">Alterar</button>
+                        <button class="btnExcluir">Excluir</button>
+                        <button class="btnConsultar">Consultar</button>
+                    </td>
+                `;
+                // Eventos de ação
+                tr.querySelector(".btnAlterar").addEventListener("click", () => {
+                    window.location.href = "manter_bloco.html?acao=alterar&id=" + index;
+                });
+                tr.querySelector(".btnExcluir").addEventListener("click", () => {
+                    if (confirm("Deseja excluir este bloco?")) {
+                        blocos.splice(index, 1);
+                        renderTabela(filtro);
+                    }
+                });
+                tr.querySelector(".btnConsultar").addEventListener("click", () => {
+                    window.location.href = "manter_bloco.html?acao=consultar&id=" + index;
+                });
+                tabela.appendChild(tr);
+            });
+    }
 
-function filtrarBlocos() {
-  const termo = document.getElementById('pesquisaBloco').value.toLowerCase();
-  const linhas = document.querySelectorAll('#tabelaBlocos tbody tr');
+    // Inicializa tabela
+    renderTabela();
 
-  linhas.forEach(linha => {
-    const texto = linha.textContent.toLowerCase();
-    linha.style.display = texto.includes(termo) ? '' : 'none';
-  });
-}
+    btnPesquisar.addEventListener("click", () => {
+        renderTabela(campoPesquisa.value);
+    });
 
-function novoBloco() {
-  window.location.href = 'manter_bloco.html?modo=novo';
-}
+    btnNovo.addEventListener("click", () => {
+        window.location.href = "manter_bloco.html?acao=novo";
+    });
 
-function voltar() {
-  window.history.back();
-}
-
-document.getElementById('pesquisaBloco').addEventListener('input', filtrarBlocos);
-document.getElementById('btnNovo').addEventListener('click', novoBloco);
-document.getElementById('btnVoltar').addEventListener('click', voltar);
-
-window.onload = carregarTabela;
+    btnVoltar.addEventListener("click", () => {
+        window.history.back();
+    });
+});
