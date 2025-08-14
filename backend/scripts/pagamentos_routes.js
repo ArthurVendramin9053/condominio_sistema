@@ -10,36 +10,15 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const { morador_id, referencia_id, data_pagamento, valor_pago } = req.body;
+    const { morador_id, valor, data_pagamento } = req.body;
     db.query(
-        'INSERT INTO pagamentos (morador_id, referencia_id, data_pagamento, valor_pago) VALUES (?, ?, ?, ?)',
-        [morador_id, referencia_id, data_pagamento, valor_pago],
+        'INSERT INTO pagamentos (morador_id, valor, data_pagamento) VALUES (?, ?, ?)',
+        [morador_id, valor, data_pagamento],
         (err, result) => {
             if (err) return res.status(500).send(err);
-            res.json({ id: result.insertId });
+            res.json({ id: result.insertId, morador_id, valor, data_pagamento });
         }
     );
-});
-
-router.put('/:id', (req, res) => {
-    const { morador_id, referencia_id, data_pagamento, valor_pago } = req.body;
-    const { id } = req.params;
-    db.query(
-        'UPDATE pagamentos SET morador_id = ?, referencia_id = ?, data_pagamento = ?, valor_pago = ? WHERE id = ?',
-        [morador_id, referencia_id, data_pagamento, valor_pago, id],
-        (err) => {
-            if (err) return res.status(500).send(err);
-            res.sendStatus(200);
-        }
-    );
-});
-
-router.delete('/:id', (req, res) => {
-    const { id } = req.params;
-    db.query('DELETE FROM pagamentos WHERE id = ?', [id], (err) => {
-        if (err) return res.status(500).send(err);
-        res.sendStatus(200);
-    });
 });
 
 module.exports = router;

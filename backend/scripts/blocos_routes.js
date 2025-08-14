@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../scripts/db_connection');
+const db = require('./db_connection');
 
 router.get('/', (req, res) => {
     db.query('SELECT * FROM blocos', (err, results) => {
@@ -16,30 +16,9 @@ router.post('/', (req, res) => {
         [descricao, quantidade_apartamentos],
         (err, result) => {
             if (err) return res.status(500).send(err);
-            res.json({ id: result.insertId });
+            res.json({ id: result.insertId, descricao, quantidade_apartamentos });
         }
     );
-});
-
-router.put('/:id', (req, res) => {
-    const { descricao, quantidade_apartamentos } = req.body;
-    const { id } = req.params;
-    db.query(
-        'UPDATE blocos SET descricao = ?, quantidade_apartamentos = ? WHERE id = ?',
-        [descricao, quantidade_apartamentos, id],
-        (err) => {
-            if (err) return res.status(500).send(err);
-            res.sendStatus(200);
-        }
-    );
-});
-
-router.delete('/:id', (req, res) => {
-    const { id } = req.params;
-    db.query('DELETE FROM blocos WHERE id = ?', [id], (err) => {
-        if (err) return res.status(500).send(err);
-        res.sendStatus(200);
-    });
 });
 
 module.exports = router;

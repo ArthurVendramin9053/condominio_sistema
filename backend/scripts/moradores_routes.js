@@ -10,36 +10,15 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const { nome, apartamento_id, telefone } = req.body;
+    const { nome, apartamento_id } = req.body;
     db.query(
-        'INSERT INTO moradores (nome, apartamento_id, telefone) VALUES (?, ?, ?)',
-        [nome, apartamento_id, telefone],
+        'INSERT INTO moradores (nome, apartamento_id) VALUES (?, ?)',
+        [nome, apartamento_id],
         (err, result) => {
             if (err) return res.status(500).send(err);
-            res.json({ id: result.insertId });
+            res.json({ id: result.insertId, nome, apartamento_id });
         }
     );
-});
-
-router.put('/:id', (req, res) => {
-    const { nome, apartamento_id, telefone } = req.body;
-    const { id } = req.params;
-    db.query(
-        'UPDATE moradores SET nome = ?, apartamento_id = ?, telefone = ? WHERE id = ?',
-        [nome, apartamento_id, telefone, id],
-        (err) => {
-            if (err) return res.status(500).send(err);
-            res.sendStatus(200);
-        }
-    );
-});
-
-router.delete('/:id', (req, res) => {
-    const { id } = req.params;
-    db.query('DELETE FROM moradores WHERE id = ?', [id], (err) => {
-        if (err) return res.status(500).send(err);
-        res.sendStatus(200);
-    });
 });
 
 module.exports = router;
