@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Pesquisar Blocos</title>
+  <link rel="stylesheet" href="../css/pesquisar_blocos.css">
+</head>
+<body>
+
+  <h1>Pesquisar Blocos</h1>
+
+  <div class="botoes">
+    <input type="text" id="pesquisaBloco" placeholder="Pesquisar bloco...">
+    <button id="btnNovo">Novo Bloco</button>
+    <button id="btnVoltar">Voltar</button>
+  </div>
+
+  <table id="tabelaBlocos">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descrição</th>
+        <th>Qtd. Apartamentos</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <script>
+    const blocos = [
+      { id: 1, descricao: "Bloco A", qtd_apartamentos: 10 },
+      { id: 2, descricao: "Bloco B", qtd_apartamentos: 8 },
+      { id: 3, descricao: "Bloco C", qtd_apartamentos: 12 }
+    ];
+
+    function carregarTabela() {
+      const tbody = document.querySelector('#tabelaBlocos tbody');
+      tbody.innerHTML = '';
+      blocos.forEach(bloco => {
+        const linha = document.createElement('tr');
+        linha.innerHTML = `
+          <td>${bloco.id}</td>
+          <td>${bloco.descricao}</td>
+          <td>${bloco.qtd_apartamentos}</td>
+        `;
+        tbody.appendChild(linha);
+      });
+    }
+
+    function filtrarBlocos() {
+      const termo = document.getElementById('pesquisaBloco').value.toLowerCase();
+      const linhas = document.querySelectorAll('#tabelaBlocos tbody tr');
+
+      linhas.forEach(linha => {
+        const texto = linha.textContent.toLowerCase();
+        linha.style.display = texto.includes(termo) ? '' : 'none';
+      });
+    }
+
+    function novoBloco() {
+      window.location.href = '../pages/cadastro_blocos.html?modo=novo';
+    }
+
+    function voltar() {
+      window.history.back();
+    }
+
+    document.getElementById('pesquisaBloco').addEventListener('input', filtrarBlocos);
+    document.getElementById('btnNovo').addEventListener('click', novoBloco);
+    document.getElementById('btnVoltar').addEventListener('click', voltar);
+
+    window.onload = carregarTabela;
+  </script>
+</body>
+</html>
