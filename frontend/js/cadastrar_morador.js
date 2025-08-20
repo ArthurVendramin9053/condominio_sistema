@@ -38,7 +38,7 @@ window.onload = () => {
     alert("Morador cadastrado com sucesso!");
   
     // Redireciona para tela anterior
-    window.location.href = "../frontend/pages/pesquisar_moradores.html";
+    window.location.href = "pesquisar_moradores.html";
   });
   
   // Voltar à tela anterior

@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const blocosRoutes = require('./scripts/blocos_routes');
-const apartamentosRoutes = require('./scripts/apartamentos_routes');
-const moradoresRoutes = require('./scripts/moradores_routes');
-const pagamentosRoutes = require('./scripts/pagamentos_routes');
-const tiposManutencaoRoutes = require('./scripts/tipos_manutencao_routes');
-const manutencoesRealizadasRoutes = require('./scripts/manutencoes_realizadas_routes');
+const blocosRoutes = require('./scripts/cadastrar_manutencao_routes');
+const apartamentosRoutes = require('./scripts/cadastrar_apartamentos_routes');
+const moradoresRoutes = require('./scripts/manter_blocos_routes');
+const pagamentosRoutes = require('./scripts/pesquisar_apartamentos_routes');
+const tiposManutencaoRoutes = require('./scripts/pesquisar_blocos_routes');
+const manutencoesRealizadasRoutes = require('./scripts/cadastrar_morador_routes');
 
 const app = express();
 app.use(cors());

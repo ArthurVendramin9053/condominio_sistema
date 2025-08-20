@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         <button class="btnConsultar">Consultar</button>
                     </td>
                 `;
-                // Eventos de ação
                 tr.querySelector(".btnAlterar").addEventListener("click", () => {
                     window.location.href = "manter_bloco.html?acao=alterar&id=" + index;
                 });
@@ -36,13 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
                 tr.querySelector(".btnConsultar").addEventListener("click", () => {
-                    window.location.href = "manter_bloco.html?acao=consultar&id=" + index;
+                    window.location.href = "manter_blocos.html?acao=consultar&id=" + index;
                 });
                 tabela.appendChild(tr);
             });
     }
 
-    // Inicializa tabela
     renderTabela();
 
     btnPesquisar.addEventListener("click", () => {
@@ -50,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     btnNovo.addEventListener("click", () => {
-        window.location.href = "manter_bloco.html?acao=novo";
+        window.location.href = "manter_blocos.html?acao=novo";
     });
 
     btnVoltar.addEventListener("click", () => {
