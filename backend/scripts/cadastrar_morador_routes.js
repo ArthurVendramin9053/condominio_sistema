@@ -2,24 +2,39 @@ const express = require('express');
 const router = express.Router();
 const db = require('./db_connection');
 
-router.get('/', (req, res) => {
-    db.query('SELECT * FROM manutencoes_realizadas', (err, results) => {
-        if (err) return res.status(500).send(err);
-        res.json(results);
-    });
-});
-
 router.post('/', (req, res) => {
-    const { tipo_id, descricao, data_realizacao } = req.body;
-    db.query(
-        'INSERT INTO manutencoes_realizadas (tipo_id, descricao, data_realizacao) VALUES (?, ?, ?)',
-        [tipo_id, descricao, data_realizacao],
-        (err, result) => {
-            if (err) return res.status(500).send(err);
-            res.json({ id: result.insertId, tipo_id, descricao, data_realizacao });
-        }
-    );
+  const {
+    cpf, nome, telefone, apartamento, bloco,
+    responsavel, proprietario, veiculo,
+    vagas, numeroVaga, placa, marca, modelo
+  } = req.body;
+
+  if (!cpf || !nome || !telefone || !apartamento || !bloco) {
+    return res.status(400).json({ error: 'Campos obrigatórios ausentes.' });
+  }
+
+  const sql = `
+    INSERT INTO moradores (
+      cpf, nome, telefone, apartamento, bloco,
+      responsavel, proprietario, veiculo,
+      vagas, numero_vaga, placa, marca, modelo
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const values = [
+    cpf, nome, telefone, apartamento, bloco,
+    responsavel, proprietario, veiculo,
+    vagas || null, numeroVaga || null, placa || null, marca || null, modelo || null
+  ];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erro ao cadastrar morador:', err);
+      return res.status(500).json({ error: 'Erro ao cadastrar morador.' });
+    }
+
+    res.status(201).json({ message: 'Morador cadastrado com sucesso!' });
+  });
 });
 
 module.exports = router;
-s

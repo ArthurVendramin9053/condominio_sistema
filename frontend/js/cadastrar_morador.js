@@ -33,9 +33,23 @@ window.onload = () => {
       return;
     }
   
-    // Simulação de salvamento
-    console.log("Morador cadastrado:", morador);
-    alert("Morador cadastrado com sucesso!");
+    fetch("http://localhost:3000/api/moradores", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(morador)
+})
+.then(res => {
+  if (!res.ok) throw new Error("Erro ao cadastrar");
+  return res.json();
+})
+.then(data => {
+  alert("Morador cadastrado com sucesso!");
+  window.location.href = "pesquisar_moradores.html";
+})
+.catch(err => {
+  console.error("Erro:", err);
+  alert("Erro ao cadastrar morador.");
+});
   
     // Redireciona para tela anterior
     window.location.href = "pesquisar_moradores.html";
