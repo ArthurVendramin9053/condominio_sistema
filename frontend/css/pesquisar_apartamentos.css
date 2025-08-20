@@ -1,0 +1,132 @@
+:root {
+    --cor-principal: #004080;
+    --cor-hover: #0059b3;
+    --cor-clara: #f9f9f9;
+    --cor-texto: #ffffff;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--cor-clara);
+    color: #333;
+  }
+  
+  header {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav a {
+    color: var(--cor-texto);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  nav a.ativo {
+    text-decoration: underline;
+  }
+  
+  main {
+    padding: 2rem;
+  }
+  
+  main h2 {
+    color: var(--cor-principal);
+    margin-bottom: 1rem;
+  }
+  
+  .acoes-topo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .acoes-topo input {
+    width: 60%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1rem;
+  }
+  
+  .acoes-topo button {
+    background-color: var(--cor-principal);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .acoes-topo button:hover {
+    background-color: var(--cor-hover);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  table th, table td {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  table td button {
+    margin-right: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    border: none;
+    background-color: var(--cor-principal);
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  table td button:hover {
+    background-color: var(--cor-hover);
+  }
+  
+  .voltar {
+    margin-top: 2rem;
+    text-align: right;
+  }
+  
+  .voltar button {
+    background-color: var(--cor-principal);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  footer {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  

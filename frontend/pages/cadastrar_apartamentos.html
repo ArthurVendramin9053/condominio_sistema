@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastrar Apartamento</title>
+  <link rel="stylesheet" href="../css/cadastrar_apartamentos.css" />
+</head>
+<body>
+  <header>
+    <h1>Condomínio</h1>
+  </header>
+
+  <main>
+    <h2>Cadastrar Apartamento</h2>
+
+    <form id="form-apartamento">
+      <label for="bloco">Bloco:</label>
+      <select id="bloco" required>
+        <option value="">Selecione</option>
+        <option value="Bloco A">Bloco A</option>
+        <option value="Bloco B">Bloco B</option>
+        <option value="Bloco C">Bloco C</option>
+        <option value="Bloco D">Bloco D</option>
+        <option value="Bloco E">Bloco E</option>
+      </select>
+
+      <label for="numero">Número do Apartamento:</label>
+      <input type="text" id="numero" required placeholder="Ex: 101" />
+
+      <div class="botoes">
+        <button type="submit">Cadastrar</button>
+        <button type="button" onclick="voltar()">Voltar</button>
+      </div>
+    </form>
+  </main>
+  <script>
+    function voltar() {
+      window.location.href = "dashboard.html"; 
+    }
+  </script>
+  
+  <footer>
+    <p>&copy; 2025 Sistema de Gestão de Condomínios</p>
+  </footer>
+
+  <script src="./js/cadastrar_apartamentos.js"></script>
+</body>
+</html>

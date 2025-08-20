@@ -1,52 +1,67 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const acao = urlParams.get("acao");
-    const id = urlParams.get("id");
-
-    const tituloPagina = document.getElementById("tituloPagina");
-    const campoNome = document.getElementById("nomeBloco");
-    const btnSalvar = document.getElementById("btnSalvar");
-
-    // Simulação de dados (depois vai ser buscado no backend)
-    let blocos = [
-        { nome: "Bloco A" },
-        { nome: "Bloco B" },
-        { nome: "Bloco C" }
-    ];
-
-    if (acao === "alterar" && id !== null) {
-        tituloPagina.textContent = "Alterar Bloco";
-        campoNome.value = blocos[id].nome;
-    } else if (acao === "consultar" && id !== null) {
-        tituloPagina.textContent = "Consultar Bloco";
-        campoNome.value = blocos[id].nome;
-        campoNome.disabled = true;
-        btnSalvar.style.display = "none";
-    } else {
-        tituloPagina.textContent = "Novo Bloco";
+let blocos = [
+    { id: 1, nome: "Bloco A", apartamentos: 12 },
+    { id: 2, nome: "Bloco B", apartamentos: 8 }
+  ];
+  
+=  const params = new URLSearchParams(window.location.search);
+  const modo = params.get("modo") || "novo";
+  const id = parseInt(params.get("id"));
+  
+  window.onload = () => {
+    const titulo = document.getElementById("titulo-operacao");
+  
+    if (modo === "consultar" || modo === "alterar") {
+      const bloco = blocos.find((b) => b.id === id);
+      if (bloco) {
+        document.getElementById("descricao").value = bloco.nome;
+        document.getElementById("quantidade").value = bloco.apartamentos;
+        titulo.textContent = modo === "consultar" ? "Consultar Bloco" : "Alterar Bloco";
+  
+        if (modo === "consultar") {
+          document.getElementById("descricao").disabled = true;
+          document.getElementById("quantidade").disabled = true;
+          document.querySelector("button[type='submit']").style.display = "none";
+        }
+      }
     }
-
-    document.getElementById("formBloco").addEventListener("submit", e => {
-        e.preventDefault();
-        const nome = campoNome.value.trim();
-
-        if (!nome) {
-            alert("O nome do bloco é obrigatório!");
-            return;
-        }
-
-        if (acao === "alterar") {
-            blocos[id].nome = nome;
-            alert("Bloco alterado com sucesso!");
-        } else {
-            blocos.push({ nome });
-            alert("Bloco cadastrado com sucesso!");
-        }
-
-        window.location.href = "pesquisar_blocos.html";
-    });
-
-    document.getElementById("btnCancelar").addEventListener("click", () => {
-        window.location.href = "pesquisar_blocos.html";
-    });
-});
+  };
+  
+  document.getElementById("form-bloco").addEventListener("submit", function (e) {
+    e.preventDefault();
+  
+    const nome = document.getElementById("descricao").value.trim();
+    const quantidade = document.getElementById("quantidade").value.trim();
+  
+    if (!nome || !quantidade) {
+      alert("Não pode ficar em branco");
+      return;
+    }
+  
+    if (
+      modo === "novo" &&
+      blocos.some((b) => b.nome.toLowerCase() === nome.toLowerCase())
+    ) {
+      alert("O bloco já está cadastrado no sistema");
+      return;
+    }
+  
+    if (modo === "novo") {
+      blocos.push({
+        id: blocos.length + 1,
+        nome,
+        apartamentos: parseInt(quantidade)
+      });
+      alert("Dados salvos com sucesso");
+    } else if (modo === "alterar") {
+      const bloco = blocos.find((b) => b.id === id);
+      bloco.nome = nome;
+      bloco.apartamentos = parseInt(quantidade);
+      alert("Dados atualizados com sucesso");
+    }
+  
+    voltar();
+  });
+  
+function voltar() {
+  window.location.href = "dashboard.html";
+}

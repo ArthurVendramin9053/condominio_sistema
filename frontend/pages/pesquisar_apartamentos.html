@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apartamentos - Gestão de Condomínios</title>
+  <link rel="stylesheet" href="../css/pesquisar_apartamentos.css" />
+</head>
+<body>
+  <header>
+    <h1>Gestão de Condomínios</h1>
+    <nav>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="blocos.html">Blocos</a></li>
+        <li><a href="apartamentos.html" class="ativo">Apartamentos</a></li>
+        <li><a href="moradores.html">Moradores</a></li>
+        <li><a href="pagamentos.html">Pagamentos</a></li>
+        <li><a href="manutencoes.html">Manutenções</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Apartamentos Cadastrados</h2>
+
+    <div class="acoes-topo">
+      <input
+        type="text"
+        id="pesquisa"
+        placeholder=""
+        oninput="filtrarApartamentos()" />
+      <button onclick="novoApartamento()">Novo Apartamento</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Bloco</th>
+          <th>Número do Apartamento</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-apartamentos">
+        <!-- Dados dinâmicos aqui -->
+      </tbody>
+    </table>
+
+    <div class="voltar">
+      <button onclick="voltar()">Voltar</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sistema de Gestão de Condomínios • Versão 1.0</p>
+  </footer>
+
+  <script src="../js/pesquisar_apartamentos.js"></script>
+</body>
+</html>

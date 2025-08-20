@@ -57,3 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.history.back();
     });
 });
+
+function voltar() {
+  window.location.href = "dashboard.html";
+}

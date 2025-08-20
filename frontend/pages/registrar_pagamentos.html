@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registrar Pagamento</title>
+  <link rel="stylesheet" href="../css/registrar_pagamentos.css" />
+</head>
+<body>
+  <header>
+    <h1>Gestão de Condomínios</h1>
+  </header>
+
+  <main>
+    <h2>Registrar Pagamento</h2>
+
+    <form id="form-pagamento">
+      <label for="referencia">Mês/Ano de Referência:</label>
+      <select id="referencia" required></select>
+
+      <label for="apartamento">Apartamento:</label>
+      <input type="text" id="apartamento" required placeholder="Ex: 101" />
+
+      <label for="cpf">CPF:</label>
+      <input type="text" id="cpf" />
+
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" />
+
+      <label for="telefone">Telefone:</label>
+      <input type="text" id="telefone" />
+
+      <label for="valor">Valor do Condomínio:</label>
+      <input type="text" id="valor" />
+
+      <label for="vencimento">Data de Vencimento:</label>
+      <input type="date" id="vencimento" />
+
+      <div class="botoes">
+        <button type="submit">Pagar</button>
+        <button type="button" onclick="voltar()">Voltar</button>
+      </div>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sistema de Gestão de Condomínios</p>
+  </footer>
+
+  <script src="../js/registrar_pagamentos.js"></script>
+</body>
+</html>

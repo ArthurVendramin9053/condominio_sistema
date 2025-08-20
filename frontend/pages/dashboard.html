@@ -1,51 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <script src="../js/dashboard.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Dashboard</h1>
-    </header>
+  <header>
+    <h1>Bem-vindo ao Sistema de Condomínio</h1>
+  </header>
 
-    <main>
-        <section class="cards">
-            <div class="card">
-                <h2>Blocos</h2>
-                <p id="total-blocos">0</p>
-                <a href="blocos.html">Ver detalhes</a>
-            </div>
-            <div class="card">
-                <h2>Apartamentos</h2>
-                <p id="total-apartamentos">0</p>
-                <a href="apartamentos.html">Ver detalhes</a>
-            </div>
-            <div class="card">
-                <h2>Moradores</h2>
-                <p id="total-moradores">0</p>
-                <a href="moradores.html">Ver detalhes</a>
-            </div>
-            <div class="card">
-                <h2>Pagamentos</h2>
-                <p id="total-pagamentos">0</p>
-                <a href="pagamentos.html">Ver detalhes</a>
-            </div>
-            <div class="card">
-                <h2>Manutenções</h2>
-                <p id="total-manutencoes">0</p>
-                <a href="manutencao.html">Ver detalhes</a>
-            </div>
-            <div class="card">
-                <h2>Histórico de Manutenções</h2>
-                <p id="total-manutencoes-realizadas">0</p>
-                <a href="manutencoes_realizadas.html">Ver detalhes</a>
-            </div>
-        </section>
-    </main>
+  <main>
+    <section class="menu">
+      <h2>Menu Principal</h2>
+      <button onclick="navegar('cadastrar_manutencao.html')">Cadastrar Manutenção</button>
+      <button onclick="navegar('realizar_manutencao.html')">Realizar Manutenção</button>
+      <button onclick="navegar('registrar_pagamentos.html')">Registrar Pagamentos</button>
+      <button onclick="navegar('cadastrar_apartamentos.html')">Cadastrar Apartamentos</button>
+      <button onclick="navegar('cadastrar_morador.html')">Cadastrar Morador</button>
+      <button onclick="navegar('manter_blocos.html')">Manter Blocos</button>
+      <button onclick="navegar('pesquisar_apartamentos.html')">Pesquisar Apartamentos</button>
+      <button onclick="navegar('pesquisar_blocos.html')">Pesquisar Blocos</button>
+      <button onclick="navegar('pesquisar_moradores.html')">Pesquisar Moradores</button>
+      <button onclick="sair()">Sair</button>
+    </section>
+  </main>
 
-    <script src="../js/dashboard.js"></script>
+  <footer>
+    <p>&copy; 2025 Sistema de Gestão de Condomínios</p>
+  </footer>
 </body>
 </html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastrar Tipo de Manutenção</title>
+  <link rel="stylesheet" href="../css/cadastrar_manutencao.css" />
+</head>
+<body>
+  <header>
+    <h1>Gestão de Condomínios</h1>
+  </header>
+
+  <main>
+    <h2>Cadastrar Tipo de Manutenção</h2>
+
+    <form id="form-manutencao">
+      <label for="descricao">Descrição da manutenção:</label>
+      <input type="text" id="descricao" required placeholder="Ex: Limpeza de caixa d'água" />
+
+      <div class="botoes">
+        <button type="submit">Cadastrar</button>
+        <button type="button" onclick="voltar()">Voltar</button>
+      </div>
+    </form>
+
+    <section id="lista-tipos">
+      <h3>Tipos já cadastrados:</h3>
+      <ul id="tipos-cadastrados"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sistema de Gestão de Condomínios</p>
+  </footer>
+
+  <script src="../js/cadastrar_manutencao.js"></script>
+</body>
+</html>
