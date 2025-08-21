@@ -1,62 +1,57 @@
-// Recebe parâmetro da tela anterior (ex: apartamento ou bloco pré-selecionado)
 window.onload = () => {
-    const params = new URLSearchParams(window.location.search);
-    const apt = params.get("apartamento");
-    const bloco = params.get("bloco");
-  
-    if (apt) document.getElementById("apartamento").value = apt;
-    if (bloco) document.getElementById("bloco").value = bloco;
+  const params = new URLSearchParams(window.location.search);
+  const apt = params.get("apartamento");
+  const bloco = params.get("bloco");
+
+  if (apt) document.getElementById("apartamento").value = apt;
+  if (bloco) document.getElementById("bloco").value = bloco;
+};
+
+document.getElementById("form-morador").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const vagasValue = document.getElementById("vagas").value;
+  const morador = {
+    cpf: document.getElementById("cpf").value.trim(),
+    nome: document.getElementById("nome").value.trim(),
+    telefone: document.getElementById("telefone").value.trim(),
+    apartamento: document.getElementById("apartamento").value.trim(),
+    bloco: document.getElementById("bloco").value,
+    responsavel: document.querySelector('input[name="responsavel"]:checked')?.value,
+    proprietario: document.querySelector('input[name="proprietario"]:checked')?.value,
+    veiculo: document.querySelector('input[name="veiculo"]:checked')?.value,
+    vagas: vagasValue ? parseInt(vagasValue) : null,
+    numeroVaga: document.getElementById("numero-vaga").value.trim(),
+    placa: document.getElementById("placa").value.trim(),
+    marca: document.getElementById("marca").value.trim(),
+    modelo: document.getElementById("modelo").value.trim()
   };
-  
-  // Salva os dados do morador
-  document.getElementById("form-morador").addEventListener("submit", function (e) {
-    e.preventDefault();
-  
-    const morador = {
-      cpf: document.getElementById("cpf").value,
-      nome: document.getElementById("nome").value,
-      telefone: document.getElementById("telefone").value,
-      apartamento: document.getElementById("apartamento").value,
-      bloco: document.getElementById("bloco").value,
-      responsavel: document.querySelector('input[name="responsavel"]:checked')?.value,
-      proprietario: document.querySelector('input[name="proprietario"]:checked')?.value,
-      veiculo: document.querySelector('input[name="veiculo"]:checked')?.value,
-      vagas: document.getElementById("vagas").value,
-      numeroVaga: document.getElementById("numero-vaga").value,
-      placa: document.getElementById("placa").value,
-      marca: document.getElementById("marca").value,
-      modelo: document.getElementById("modelo").value
-    };
-  
-    if (!morador.cpf || !morador.nome || !morador.telefone || !morador.apartamento || !morador.bloco) {
-      alert("Preencha todos os campos obrigatórios.");
-      return;
-    }
-  
-    fetch("http://localhost:3000/api/moradores", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(morador)
-})
-.then(res => {
-  if (!res.ok) throw new Error("Erro ao cadastrar");
-  return res.json();
-})
-.then(data => {
-  alert("Morador cadastrado com sucesso!");
-  window.location.href = "pesquisar_moradores.html";
-})
-.catch(err => {
-  console.error("Erro:", err);
-  alert("Erro ao cadastrar morador.");
-});
-  
-    // Redireciona para tela anterior
-    window.location.href = "pesquisar_moradores.html";
-  });
-  
-  // Voltar à tela anterior
-  function voltar() {
-    window.location.href = "dashboard.html";
+
+  if (!morador.cpf || !morador.nome || !morador.telefone || !morador.apartamento || !morador.bloco) {
+    alert("Preencha todos os campos obrigatórios.");
+    return;
   }
-  
+
+  fetch("http://localhost:3000/api/moradores", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(morador)
+  })
+    .then(res => res.json().then(data => ({ status: res.status, body: data })))
+    .then(({ status, body }) => {
+      if (status !== 201) {
+        alert(body.error || "Erro ao cadastrar morador.");
+        throw new Error(body.error);
+      } else {
+        alert("Morador cadastrado com sucesso!");
+        window.location.href = "pesquisar_moradores.html";
+      }
+    })
+    .catch(err => {
+      console.error("Erro:", err);
+    });
+});
+
+function voltar() {
+  window.location.href = "dashboard.html";
+}

@@ -19,7 +19,7 @@ document.getElementById("form-apartamento").addEventListener("submit", function 
   .then(res => res.json())
   .then(data => {
     alert("Apartamento cadastrado com sucesso!");
-    window.location.href = "apartamentos.html";
+    window.location.href = "pesquisar_apartamentos.html";
   })
   .catch(err => {
     console.error("Erro ao cadastrar:", err);

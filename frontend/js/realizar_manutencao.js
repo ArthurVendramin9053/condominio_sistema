@@ -1,18 +1,24 @@
-let tiposManutencao = ["Limpeza", "Pintura", "Reparo Elétrico"];
-
 window.addEventListener("DOMContentLoaded", () => {
   carregarCombo();
   document.getElementById("form-manutencao").addEventListener("submit", registrarManutencao);
 });
 
 function carregarCombo() {
-  const combo = document.getElementById("tipo");
-  tiposManutencao.forEach(tipo => {
-    const option = document.createElement("option");
-    option.value = tipo;
-    option.textContent = tipo;
-    combo.appendChild(option);
-  });
+  fetch("http://localhost:3000/api/manutencoes/tipos")
+    .then(res => res.json())
+    .then(tipos => {
+      const combo = document.getElementById("tipo");
+      tipos.forEach(tipo => {
+        const option = document.createElement("option");
+        option.value = tipo.descricao;
+        option.textContent = tipo.descricao;
+        combo.appendChild(option);
+      });
+    })
+    .catch(err => {
+      alert("Erro ao carregar tipos de manutenção.");
+      console.error(err);
+    });
 }
 
 function registrarManutencao(e) {
@@ -33,9 +39,23 @@ function registrarManutencao(e) {
     local
   };
 
-  console.log("Manutenção registrada:", manutencao);
-  alert(`✅ Manutenção registrada com sucesso!\n\nTipo: ${tipo}\nData: ${data}\nLocal: ${local}`);
-  voltar();
+  fetch("http://localhost:3000/api/manutencoes/registro", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(manutencao)
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("Erro ao registrar manutenção.");
+      return res.json();
+    })
+    .then(() => {
+      alert(`✅ Manutenção registrada com sucesso!\n\nTipo: ${tipo}\nData: ${data}\nLocal: ${local}`);
+      voltar();
+    })
+    .catch(err => {
+      alert(err.message);
+      console.error(err);
+    });
 }
 
 function voltar() {

@@ -49,3 +49,6 @@ function cadastrarTipo(e) {
       console.error(err);
     });
 }
+  function voltar() {
+    window.location.href = "dashboard.html";
+  }

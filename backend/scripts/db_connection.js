@@ -1,18 +1,18 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'condominio'
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root', // ou sua senha
+  database: 'condominio'
 });
 
-connection.connect((err) => {
-    if (err) {
-        console.error('Erro ao conectar ao banco de dados:', err);
-        return;
-    }
-    console.log('Conectado ao banco de dados MySQL!');
+db.connect((err) => {
+  if (err) {
+    console.error('❌ Erro ao conectar ao banco de dados:', err.message);
+    return;
+  }
+  console.log('✅ Conectado ao banco de dados MySQL.');
 });
 
-module.exports = connection;
+module.exports = db;
